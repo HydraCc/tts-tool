@@ -7,31 +7,30 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
-# Create non-root user (optional, disable if using `user: root`)
+# Create non-root user (optional, disable if using `user: root` in compose)
 RUN useradd --create-home --shell /bin/bash tts-user
 
 # Set working directory to container-side /app
 WORKDIR /app
 
-# Copy requirements (relative to build context)
+# Copy Python dependency definitions
 COPY requirements.txt .
+COPY setup.py .
 
-# Install Python dependencies
+# Install Python dependencies and your package (editable mode)
 RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install -e .
 
-# Copy engine source code into /app
-COPY . .
+# Copy actual engine package (your codebase)
+COPY engine/ engine/
 
-# Install engine package in editable mode
-RUN pip install -e .
-
-# Create output/model directories just in case
-RUN mkdir -p /app/models /app/output && \
+# Create persistent directories and set permissions
+RUN mkdir -p /app/engine/models /app/engine/output && \
     chown -R tts-user:tts-user /app
 
-# Leave root if needed
+# Optional: drop privileges
 # USER tts-user
 
-# Keep container running for dev/debug
+# Keep container alive for development
 CMD ["tail", "-f", "/dev/null"]
