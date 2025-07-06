@@ -85,13 +85,17 @@ You can run the project either using Docker (recommended for isolation) or local
 tts-tool/
 ├── engine/                  ← Dev folder (Dockerfile, setup, venv)
 │   ├── engine/              ← Actual Python package
-│   │   ├── models/
-│   │   ├── pipelines/
+│   │   ├── models/          ← New models here
+│   │   ├── pipelines/       ← New pipelines here
 │   │   └── examples/
 │   │       └── coqui_example.py
 │   ├── requirements.txt
 │   ├── setup.py
 │   └── Dockerfile
+├── .dockerignore
+├── .gitignore
 ├── docker-compose.yml
-└── sample_data/
+├── DOCKER_GUIDE.md
+├── engine.env
+└── README.md
 ```
