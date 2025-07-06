@@ -144,6 +144,21 @@ ENV/
 env.bak/
 venv.bak/
 
+# Docker
+.env
+docker-compose.override.yml
+.docker/
+
+# TTS Engine Environment (keep engine.env in repo, but allow local overrides)
+engine.local.env
+
+# TTS Models and Data
+models/
+*.wav
+*.mp3
+*.flac
+output/
+
 # Spyder project settings
 .spyderproject
 .spyproject

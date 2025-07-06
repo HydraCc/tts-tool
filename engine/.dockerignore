@@ -1,0 +1,121 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.virtualenv/
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose*.yml
+.docker/
+
+# Documentation and development files
+README.md
+*.md
+docs/
+CHANGELOG*
+LICENSE*
+CONTRIBUTING*
+
+# Test files
+tests/
+test/
+.pytest_cache/
+.coverage
+.nox/
+.tox/
+htmlcov/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Development scripts
+docker-dev.sh
+docker-dev.ps1
+.env.example
+engine.env
+
+# OS and temporary files
+.tmp/
+tmp/
+temp/
+*.tmp
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Model files and outputs (will be mounted as volumes)
+models/
+output/
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.m4a
+
+# Sample data (will be mounted as volume)
+sample_data/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# PyCharm
+.idea/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Configuration files that shouldn't be in image
+*.local
+*.config
+.env*

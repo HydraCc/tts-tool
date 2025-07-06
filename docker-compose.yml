@@ -1,0 +1,58 @@
+services:
+  # TTS Engine Service
+  tts-engine:
+    build:
+      context: ./engine
+      dockerfile: Dockerfile
+    container_name: tts-engine
+    ports:
+      - "${TTS_ENGINE_PORT:-8000}:8000"
+    volumes:
+      - ./:/app
+      - ./sample_data:/engine/sample_data  # Mount sample data
+      - tts-models:/engine/models  # Persistent volume for TTS models
+      - tts-output:/engine/output  # Persistent volume for output files
+    working_dir: /app/engine 
+    env_file:
+      - engine.env  # Load engine-specific environment variables
+    networks:
+      - tts-network
+    restart: unless-stopped
+    # For development: run as root to avoid permission issues with mounted volumes
+    user: root
+    # Override default command to run an interactive shell for development
+    command: tail -f /dev/null  # Keeps container running for development
+
+  # Future Backend API Service (placeholder)
+  # backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   container_name: tts-backend
+  #   depends_on:
+  #     - tts-engine
+  #   networks:
+  #     - tts-network
+
+  # Future Frontend Service (placeholder)
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: tts-frontend
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - tts-network
+
+# Networks
+networks:
+  tts-network:
+    driver: bridge
+
+# Volumes
+volumes:
+  tts-models:  # Persistent storage for TTS models
+    driver: local
+  tts-output:  # Persistent storage for generated audio files
+    driver: local
